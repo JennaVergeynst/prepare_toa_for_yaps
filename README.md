@@ -9,3 +9,6 @@ Run Use_of_prepare_toa_data.py to create a TOA-matrix from the given example dat
 This will also create 4 figures that illustrate the process on the given data.   
 
 For questions, feel free to open an issue or contact the author!
+
+## Note before you start
+This code is in python, but it is also entirely [available in R](https://github.com/elipickh/ReceiverArrays), thanks to Eliezer Pickholtz.
