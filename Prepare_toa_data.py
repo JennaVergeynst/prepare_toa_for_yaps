@@ -318,7 +318,7 @@ def create_final_toa(tag_data,  max_time, min_burst, max_burst, time_col,
 
 
 
-def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data, filled_toa, final_toa, write_path, time_col):
+def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data, filled_toa, final_toa, write_path, time_col, plot='off'):
 
     """
     Make plots for checking quality of TOA matrix
@@ -339,11 +339,14 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
         path where to save figures
     time_col : string
         name of time column
+    plot : string
+        'on' or 'off', resp. showing plots or not showing plots (only saving)
 
 
     """
     # don't show plots in notebook
-    plt.ioff()
+    if plot=='off':
+        plt.ioff()
 
     fig,ax = plt.subplots()
     dif = toa_data.loc[:,rec_cols].mean(axis=1).diff()
