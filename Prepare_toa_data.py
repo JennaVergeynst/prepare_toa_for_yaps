@@ -318,7 +318,7 @@ def create_final_toa(tag_data,  max_time, min_burst, max_burst, time_col,
 
 
 
-def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data, filled_toa, final_toa, write_path):
+def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data, filled_toa, final_toa, write_path, time_col):
 
     """
     Make plots for checking quality of TOA matrix
@@ -337,6 +337,8 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
         contains for each groups_pas nb the DataFrame after the second round of gap filling
     write_path : string
         path where to save figures
+    time_col : string
+        name of time column
 
 
     """
@@ -344,7 +346,9 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
     plt.ioff()
 
     fig,ax = plt.subplots()
-    toa_data.loc[:,rec_cols].mean(axis=1).diff().plot(marker='.', lw=0, ax=ax, alpha=0.3)
+    dif = toa_data.loc[:,rec_cols].mean(axis=1).diff()
+    ax.plot(toa_data[time_col], dif, alpha=0.3, lw=0, marker='.')
+    fig.autofmt_xdate()
     ax.set_ylim(-5,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')
@@ -353,7 +357,9 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
     fig.savefig(write_path+'1_uncleaned_'+str(ID)+'.png')
 
     fig,ax = plt.subplots()
-    cleaned_toa_data.loc[:,rec_cols].mean(axis=1).diff().plot(marker='.', lw=0, ax=ax, alpha=0.3)
+    dif = cleaned_toa_data.loc[:,rec_cols].mean(axis=1).diff()
+    ax.plot(cleaned_toa_data[time_col], dif, alpha=0.3, lw=0, marker='.')
+    fig.autofmt_xdate()
     ax.set_ylim(-5,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')
@@ -365,7 +371,8 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
     for key in filled_toa.keys():
         filled_toa[key]['diff'] = filled_toa[key].loc[:,rec_cols].mean(axis=1).diff()
     filled_toa_df = pd.concat(filled_toa).reset_index(drop=True)
-    filled_toa_df['diff'].plot(marker='.', lw=0, ax=ax, alpha=0.3)
+    ax.plot(filled_toa_df[time_col], filled_toa_df['diff'], alpha=0.3, lw=0, marker='.')
+    fig.autofmt_xdate()
     ax.set_ylim(0,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')
@@ -377,7 +384,8 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
     for key in final_toa.keys():
         final_toa[key]['diff'] = final_toa[key].loc[:,rec_cols].mean(axis=1).diff()
     final_toa_df = pd.concat(final_toa).reset_index(drop=True)
-    final_toa_df['diff'].plot(marker='.', lw=0, ax=ax, alpha=0.3)
+    ax.plot(final_toa_df[time_col], final_toa_df['diff'], alpha=0.3, lw=0, marker='.')
+    fig.autofmt_xdate()
     #ax.set_ylim(0,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')

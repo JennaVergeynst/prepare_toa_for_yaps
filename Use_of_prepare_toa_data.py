@@ -42,4 +42,4 @@ final_toa_df.to_csv('TOA_'+str(ID)+'.csv')
 # the time differences between 2 lines of the dataframe should be within min and max burst
 create_plots(ID=ID, min_burst=min_burst, max_burst=max_burst, rec_cols=rec_cols, toa_data=toa_data,
              cleaned_toa_data=cleaned_toa_data, filled_toa=filled_toa, final_toa=final_toa,
-             write_path='./')
+             write_path='./', time_col='SyncTime')
