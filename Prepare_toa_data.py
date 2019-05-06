@@ -363,7 +363,9 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
 
     fig,ax = plt.subplots()
     for key in filled_toa.keys():
-        filled_toa[key].loc[:,rec_cols].mean(axis=1).diff().plot(marker='.', lw=0, ax=ax, alpha=0.3)
+        filled_toa[key]['diff'] = filled_toa[key].loc[:,rec_cols].mean(axis=1).diff()
+    filled_toa_df = pd.concat(filled_toa).reset_index(drop=True)
+    filled_toa_df['diff'].plot(marker='.', lw=0, ax=ax, alpha=0.3)
     ax.set_ylim(0,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')
@@ -373,8 +375,10 @@ def create_plots(ID, min_burst, max_burst, rec_cols, toa_data, cleaned_toa_data,
 
     fig,ax = plt.subplots()
     for key in final_toa.keys():
-        final_toa[key].loc[:,rec_cols].mean(axis=1).diff().plot(marker='.', lw=0, ax=ax, alpha=0.3)
-    #ax.set_ylim(0,5)
+        final_toa[key]['diff'] = final_toa[key].loc[:,rec_cols].mean(axis=1).diff()
+    final_toa_df = pd.concat(final_toa).reset_index(drop=True)
+    final_toa_df['diff'].plot(marker='.', lw=0, ax=ax, alpha=0.3)
+    #ax.set_ylim(0,5*max_burst)
     ax.plot(ax.get_xbound(),(min_burst, min_burst), c='red')
     ax.plot(ax.get_xbound(),(max_burst, max_burst), c='red')
     ax.set_title('Burst intervals fish '+str(ID)+ ' after second round of gap filling')
