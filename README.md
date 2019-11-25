@@ -10,5 +10,7 @@ This will also create 4 figures that illustrate the process on the given data.
 
 For questions, feel free to open an issue or contact the author!
 
+Cite as: Vergeynst, Jenna. (2019, November 13). JennaVergeynst/prepare_toa_for_yaps: Code to prepare TOA-data for YAPS. Zenodo. http://doi.org/10.5281/zenodo.3540682
+
 ## Note before you start
 This code is in python, but it is also entirely [available in R](https://github.com/elipickh/ReceiverArrays), thanks to Eliezer Pickholtz.
