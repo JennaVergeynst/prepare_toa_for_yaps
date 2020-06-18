@@ -14,3 +14,5 @@ Cite as: Vergeynst, Jenna. (2019, November 13). JennaVergeynst/prepare_toa_for_y
 
 ## Note before you start
 This code is in python, but it is also entirely [available in R](https://github.com/elipickh/ReceiverArrays), thanks to Eliezer Pickholtz.
+
+The creation of TOA matrices is now included in the YAPS package, making this work possibly redundant. Please check the step-by-step guide available via the [YAPS page](https://github.com/baktoft/yaps).
